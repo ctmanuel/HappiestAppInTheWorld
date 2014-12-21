@@ -268,4 +268,7 @@ proguard/
 hs_err_pid*
 
 
-
+##############
+## Android Studio
+##############
+workspace.xml
