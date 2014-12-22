@@ -4,5 +4,9 @@
     <string name="app_name">HelloWorld</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world! Rob wuz hear!</string>
+    <string name="happiest_app">This is the happiest app in the WORLD!!!</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_send">Send</string>
+    <string name="title_activity_display_message">My Message</string>
 
 </resources>
