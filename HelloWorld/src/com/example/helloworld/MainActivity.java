@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.notifications.NotificationPusher;
 import com.example.settings.SettingsActivity;
 
 public class MainActivity extends Activity {
@@ -42,6 +43,7 @@ public class MainActivity extends Activity {
 
 	/** Called when the user clicks the Send button */
 	public void sendMessage(View view) {
+
 		// Create a new intent that in turn will call the new activity to
 		// display the message
 		Intent intent = new Intent(this, DisplayMessageActivity.class);
@@ -53,7 +55,7 @@ public class MainActivity extends Activity {
 		 * value in the second
 		 */
 		intent.putExtra(EXTRA_MESSAGE, message);
+		NotificationPusher.notify(this, message);
 		startActivity(intent); // start the activity
 	}
-
 }

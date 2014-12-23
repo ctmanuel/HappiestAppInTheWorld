@@ -1,11 +1,9 @@
 package com.example.helloworld;
 
 import android.app.Activity;
-import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v4.app.NotificationCompat;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -33,20 +31,6 @@ public class DisplayMessageActivity extends Activity {
 		// it to setContentView().
 		setContentView(textView);
 
-		// Testing out proof of concept for notifications
-		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-				this).setSmallIcon(R.drawable.ic_launcher)
-				.setContentTitle("Happiest App In the World Notification!")
-				.setContentText(message); // use ".setNumber" to note the number
-											// of stacked notifications
-
-		// Sets an ID for the notification - so that we update previously sent
-		// notifications
-		int mNotificationId = 001;
-		// Gets an instance of the NotificationManager service
-		NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		// Builds the notification and issues it.
-		mNotifyMgr.notify(mNotificationId, mBuilder.build());
 	}
 
 	/*
