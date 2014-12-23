@@ -9,5 +9,210 @@
         <item >Backwards</item>
         <item >Backhanded</item>
     </string-array>
-    
+    <string-array name="compliments_arr">
+    	<item >You are deserving.</item>
+		<item >You make everyone feel pleasant.</item>
+		<item >You are sweet.</item>
+		<item >You are intelligent.</item>
+		<item >You have a nice ear.</item>
+		<item >You have an ultimately riveting house.</item>
+		<item >You have definitively lovely hair.</item>
+		<item >You are caring.</item>
+		<item >You have deep shoulders.</item>
+		<item >You make me feel exceptionally wonderful.</item>
+		<item >You have a very friendly pinky toe.</item>
+		<item >You are practical.</item>
+		<item >You are slightly intelligent.</item>
+		<item >You make people feel great.</item>
+		<item >You have amazingly beautiful timing.</item>
+		<item >You have a rather feminine laugh.</item>
+		<item >You make everyone feel ultimately groovy.</item>
+		<item >You have rather neat eyes.</item>
+		<item >You have an amazingly large tailbone.</item>
+		<item >You make me feel slightly good.</item>
+		<item >You have an erect bottom.</item>
+		<item >You have intelligent eyes.</item>
+		<item >You make me feel ultimately wonderful.</item>
+		<item >You are groovy.</item>
+		<item >You make everyone feel great.</item>
+		<item >You have a slightly deep conscience.</item>
+		<item >You are valuable.</item>
+		<item >You have a groovy ear.</item>
+		<item >You have slightly intelligent values.</item>
+		<item >You are definitively lovely.</item>
+		<item >You are extremely out-of-sight.</item>
+		<item >You have rather organized legs.</item>
+		<item >You are ultimately beautiful.</item>
+		<item >You have masculine feet.</item>
+		<item >You have a sweet nose.</item>
+		<item >You have very forthright thighs.</item>
+		<item >You have ultimately lovely timing.</item>
+		<item >You make me feel good.</item>
+		<item >You have an ultimately organized large toe.</item>
+		<item >You make me feel great.</item>
+		<item >You make everyone feel sweet.</item>
+		<item >You have feminine buns.</item>
+		<item >You make everyone feel very good.</item>
+		<item >You have organized eyes.</item>
+		<item >You have feminine values.</item>
+		<item >You make people feel good.</item>
+		<item >You make people feel very rational.</item>
+		<item >You make people feel amazingly forthright.</item>
+		<item >You have a slightly intelligent mind.</item>
+		<item >You are large.</item>
+		<item >You are extremely thoughtful.</item>
+		<item >You have a large ear.</item>
+		<item >You have a rather organized left cheek.</item>
+		<item >You make me feel extremely great.</item>
+		<item >You have intelligent thighs.</item>
+		<item >You have thoughtful legs.</item>
+		<item >You have an unbelievably rational large toe.</item>
+		<item >You have an ultimately logical chest area.</item>
+		<item >You have exceptionally neat knees.</item>
+		<item >You are unbelievably intelligent.</item>
+		<item >You are erect.</item>
+		<item >You have lovely eyes.</item>
+		<item >You are exceptionally practical.</item>
+		<item >You make everyone feel rational.</item>
+		<item >You have logical ideas.</item>
+		<item >You have a forthright conscience.</item>
+		<item >You have pleasant ideas.</item>
+		<item >You have a rather insightful neck.</item>
+		<item >You make everyone feel very great.</item>
+		<item >You have a rather feminine large toe.</item>
+		<item >You make people feel slightly great.</item>
+		<item >You have masculine knees.</item>
+		<item >You have an erect life.</item>
+		<item >You are feminine.</item>
+		<item >You are rather thoughtful.</item>
+		<item >You are rather nice.</item>
+		<item >You are rational.</item>
+		<item >You are slightly clean.</item>
+		<item >You are extremely friendly.</item>
+		<item >You make everyone feel exceptionally good.</item>
+		<item >You have rather large hair.</item>
+		<item >You have a feminine body.</item>
+		<item >You have an exceptionally rational life.</item>
+		<item >You have ultimately intelligent values.</item>
+		<item >You have an exceptionally feminine funnybone.</item>
+		<item >You have ultimately deserving buns.</item>
+		<item >You make everyone feel slightly great.</item>
+		<item >You make people feel wonderful.</item>
+		<item >You make me feel rather valuable.</item>
+		<item >You have an extremely neat neck.</item>
+		<item >You make everyone feel extremely great.</item>
+		<item >You have an unbelievably rational pinky toe.</item>
+		<item >You have erect hair.</item>
+		<item >You are very clean.</item>
+		<item >You have very masculine hands.</item>
+		<item >You have an amazingly sweet laugh.</item>
+		<item >You make people feel amazingly nice.</item>
+		<item >You are beautiful.</item>
+		<item >You have a thoughtful soul.</item>
+		<item >You are friendly.</item>
+		<item >You are thoughtful.</item>
+		<item >You are masculine.</item>
+		<item >You have amazingly nice buns.</item>
+		<item >You have unbelievably friendly thighs.</item>
+		<item >You have a slightly erect large toe.</item>
+		<item >You have insightful eyebrows.</item>
+		<item >You have a caring mind.</item>
+		<item >You have an exceptionally neat right cheek.</item>
+		<item >You are unbelievably insightful.</item>
+		<item >You have ultimately lovely hands.</item>
+		<item >You are unbelievably caring.</item>
+		<item >You have a sweet neck.</item>
+		<item >You have groovy legs.</item>
+		<item >You have practical legs.</item>
+		<item >You make me feel lovely.</item>
+		<item >You have intelligent ears.</item>
+		<item >You have lovely timing.</item>
+		<item >You are nice.</item>
+		<item >You are extremely pleasant.</item>
+		<item >You have a deep conscience.</item>
+		<item >You make everyone feel good.</item>
+		<item >You make everyone feel exceptionally great.</item>
+		<item >You are exceptionally valuable.</item>
+		<item >You make everyone feel unbelievably caring.</item>
+		<item >You have an exceptionally lovely funnybone.</item>
+		<item >You have a masculine finger.</item>
+		<item >You have a very riveting backbone.</item>
+		<item >You have rather insightful eyes.</item>
+		<item >You are slightly lovely.</item>
+		<item >You have exceptionally nice ears.</item>
+		<item >You make me feel unbelievably great.</item>
+		<item >You make me feel intelligent.</item>
+		<item >You have slightly out-of-sight eyebrows.</item>
+		<item >You are deep.</item>
+		<item >You have ultimately practical feet.</item>
+		<item >You have a feminine bottom.</item>
+		<item >You are definitively practical.</item>
+		<item >You have extremely pleasant hair.</item>
+		<item >You have intelligent eyebrows.</item>
+		<item >You are very groovy.</item>
+		<item >You make me feel exceptionally organized.</item>
+		<item >You have a very neat ear.</item>
+		<item >You have an ultimately groovy neck.</item>
+		<item >You make everyone feel wonderful.</item>
+		<item >You are definitively forthright.</item>
+		<item >You are neat.</item>
+		<item >You are exceptionally insightful.</item>
+		<item >You make people feel unbelievably wonderful.</item>
+		<item >You have a slightly valuable finger.</item>
+		<item >You are ultimately neat.</item>
+		<item >You have rather deep ears.</item>
+		<item >You have rather evolved knees.</item>
+		<item >You make people feel extremely wonderful.</item>
+		<item >You have erect values.</item>
+		<item >You make me feel wonderful.</item>
+		<item >You have extremely valuable intuitions.</item>
+		<item >You have thoughtful ideas.</item>
+		<item >You are rather lovely.</item>
+		<item >You have ultimately large eyebrows.</item>
+		<item >You have a thoughtful left cheek.</item>
+		<item >You have rather rational buns.</item>
+		<item >You make people feel definitively wonderful.</item>
+		<item >You have a friendly mind.</item>
+		<item >You have a valuable chest area.</item>
+		<item >You have a very lovely laugh.</item>
+		<item >You have a neat funnybone.</item>
+		<item >You make me feel ultimately good.</item>
+		<item >You have amazingly beautiful legs.</item>
+		<item >You make me feel slightly great.</item>
+		<item >You are very contemplative.</item>
+		<item >You have extremely clean buns.</item>
+		<item >You have deep thighs.</item>
+		<item >You have a nice nose.</item>
+		<item >You have valuable thighs.</item>
+		<item >You are definitively beautiful.</item>
+		<item >You have logical hands.</item>
+		<item >You have rational ideas.</item>
+		<item >You are rather practical.</item>
+		<item >You are organized.</item>
+		<item >You have a practical finger.</item>
+		<item >You have a riveting body.</item>
+		<item >You have rather clean shoulders.</item>
+		<item >You have an exceptionally feminine tailbone.</item>
+		<item >You have nice thighs.</item>
+		<item >You have an ultimately insightful backbone.</item>
+		<item >You have an amazingly valuable tailbone.</item>
+		<item >You are extremely erect.</item>
+		<item >You have an ultimately sweet right cheek.</item>
+		<item >You make me feel exceptionally great.</item>
+		<item >You make everyone feel feminine.</item>
+		<item >You are unbelievably out-of-sight.</item>
+		<item >You are riveting.</item>
+		<item >You are very nice.</item>
+		<item >You have clean timing.</item>
+		<item >You have a slightly rational right cheek.</item>
+		<item >You are exceptionally riveting.</item>
+		<item >You have deserving thighs.</item>
+		<item >You have a definitively neat bottom.</item>
+		<item >You have pleasant hands.</item>
+		<item >You have exceptionally feminine thighs.</item>
+		<item >You are ultimately forthright.</item>
+		<item >You have an organized ear.</item>
+		<item >You have friendly knees.</item>
+		<item >You are pleasant.</item>
+    </string-array>
 </resources>
