@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="niceness_levels">
+        <item >Nice</item>
+        <item >Super Nice</item>
+        <item >Everybody Gets a Tropy</item>
+        <item >My Little Pony</item>
+        <item >Sarcastic</item>
+        <item >Backwards</item>
+        <item >Backhanded</item>
+    </string-array>
+    
+</resources>
