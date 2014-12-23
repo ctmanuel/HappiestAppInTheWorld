@@ -8,6 +8,9 @@ It takes a while because web requests take time...
 """
 import urllib.request
 import time
+import threading
+
+some_rlock = threading.RLock()
 
 compliment_url = 'http://toykeeper.net/programs/mad/compliments'
 
@@ -45,21 +48,42 @@ def num_compliments():
 	num_unique_compliments = len(comps.keys())
 	print( "Unique Compliments: ", num_unique_compliments)
 
-# TODO: Multi thread everything below this line
-samples = 1000
-for i in range(samples):
-	new_comp = get_compliment()
-	
-	if len(new_comp) > 2: # parser sends empty string as error	
-		#################3
-		# Put the mutex around this
-		if new_comp not in comps:
-			write_compliment(new_comp)
-			comps[new_comp] = True
-		##########
+def collect_compliments(thread=""):
+	"""
+	Start collecting some compliments. Only save unique ones
+	"""
+	samples = 100
+	for i in range(samples):
+		new_comp = get_compliment()
+		
+		with some_rlock: # Locked resources!
+			if len(new_comp) > 2: # parser sends empty string as error	
+				if new_comp not in comps:
+					write_compliment(new_comp)
+					comps[new_comp] = True
 
-	if i % 10 == 0:
-		print(int(i/samples*100.0), "%")
-		num_compliments()
+		if i % 10 == 0:
+			print(thread,": ", int(i/samples*100.0), "%")
+			num_compliments()
 
-num_compliments()
+class ComplimentCollectinThread (threading.Thread):
+	"""
+	A basic thread for collecting compliments. I am unsure
+	about how to kill these threads once the program starts....
+	"""
+	def __init__(self, name):
+		threading.Thread.__init__(self)
+		self.name = name
+
+	def run(self):
+		print( "Starting " + self.name)
+		collect_compliments(thread=self.name)
+		print( "Exiting " + self.name)
+
+
+### RUN IT
+num_threads = 40
+threads = []
+for x in range(num_threads):
+	threads.append( ComplimentCollectinThread("Thread: " + str(x)))
+	threads[x].start()
