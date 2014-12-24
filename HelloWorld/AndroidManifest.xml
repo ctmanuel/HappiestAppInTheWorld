@@ -33,6 +33,7 @@
         <activity android:name="com.example.settings.SettingsActivity" android:enabled="true" android:label="@string/action_settings" android:parentActivityName="com.example.helloworld.MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.example.helloworld.MainActivity"/>
         </activity>
+        <service android:name="ComplimentService"></service>
     </application>
 
 </manifest>

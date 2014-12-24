@@ -18,7 +18,12 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		ComplimentService.initialize(this); // re-initialize every time because
+											// the settings may change. This
+											// feels like a hack.
+
 		setContentView(R.layout.activity_main);
+
 	}
 
 	@Override
@@ -58,4 +63,5 @@ public class MainActivity extends Activity {
 		NotificationPusher.notify(this, message);
 		startActivity(intent); // start the activity
 	}
+
 }

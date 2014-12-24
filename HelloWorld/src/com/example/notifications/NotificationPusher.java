@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.example.helloworld.R;
 
@@ -54,11 +55,11 @@ public class NotificationPusher {
 
 			// Builds the notification and issues it.
 			mNotifyMgr.notify(mNotificationId, mBuilder.build());
+			Log.d("HappiestAppInTheWorld", "Notification sent: '" + message
+					+ "'");
 			return true;
 		}
 		return false;
 	}
 
-	// TODO:
-	// A timer based notification system? do it daily?
 }
