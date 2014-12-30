@@ -2,7 +2,6 @@ package com.example.helloworld;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.TimeZone;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -11,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -39,32 +39,10 @@ public class ComplimentService extends Service {
 
 		SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(c);
 		if (SP.getBoolean("Notifications", false)) {
+			long interval = 1000;// milliseconds
+			alarm.setRepeating(AlarmManager.ELAPSED_REALTIME,
+					SystemClock.elapsedRealtime(), interval, pending);
 
-			// On a repeating timer
-			// long interval = 1000;// milliseconds
-			// alarm.setInexactRepeating(AlarmManager.RTC,
-			// SystemClock.elapsedRealtime(), interval, pending);
-
-			// Set a daily alarm to the given time from preferences
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTimeInMillis(System.currentTimeMillis());
-			calendar.setTimeZone(TimeZone.getDefault());
-			try { // TODO: Enforce a valid input for notification_hr preference.
-					// The user can set the preference to blank. Handled with a
-					// hack to catch the exception....
-				calendar.set(Calendar.HOUR_OF_DAY,
-						Integer.parseInt(SP.getString("notification_hr", "12")));
-				calendar.set(Calendar.MINUTE, Integer.parseInt(SP.getString(
-						"notification_min", "12")));
-			} catch (NumberFormatException nfe) {
-				calendar.set(Calendar.HOUR_OF_DAY, 12);
-				calendar.set(Calendar.MINUTE, 12);
-				Log.w("HappiestAppInTheWorld",
-						"Invalid preference values for notification hour or minutes.");
-			}
-			alarm.setInexactRepeating(AlarmManager.RTC,
-					calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
-					pending);
 			Log.i("HappiestAppInTheWorld",
 					"Started the timed Notifications service.");
 

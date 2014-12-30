@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <CheckBoxPreference android:enabled="true" android:title="Notifications" android:selectable="true" android:summary="Would you like to allow notifications?" android:key="Notifications" android:defaultValue="true"/>
+    <ListPreference android:key="level_of_niceness" android:title="Level of Niceness" android:summary="How nice would you like this to be?" android:entryValues="@array/niceness_levels" android:entries="@array/niceness_levels" android:defaultValue="Nice"/>
     
-    <ListPreference android:key="level_of_niceness" android:title="Level of Niceness" android:summary="How nice would you like this to be?" android:entryValues="@array/niceness_levels" android:entries="@array/niceness_levels" android:defaultValue="Nice"/><CheckBoxPreference android:enabled="true" android:title="Notifications" android:selectable="true" android:summary="Would you like to allow notifications?" android:key="Notifications" android:defaultValue="true" />
-    <EditTextPreference android:title="Desired hour for compliments" android:key="notification_hr" android:defaultValue="12" android:summary="Specify at what hour you would like your compliments to be" android:enabled="true" android:numeric="integer"/>
-    <EditTextPreference android:title="Desired minute for compliments" android:key="notification_min" android:defaultValue="12" android:summary="Specify at what minute you would like your compliments to be" android:enabled="true" android:numeric="integer"/>
 
 
 </PreferenceScreen>
