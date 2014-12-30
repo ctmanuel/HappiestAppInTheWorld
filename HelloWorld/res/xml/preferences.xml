@@ -5,4 +5,5 @@
     <EditTextPreference android:title="Desired hour for compliments" android:key="notification_hr" android:defaultValue="12" android:summary="Specify at what hour you would like your compliments to be" android:enabled="true" android:numeric="integer"/>
     <EditTextPreference android:title="Desired minute for compliments" android:key="notification_min" android:defaultValue="12" android:summary="Specify at what minute you would like your compliments to be" android:enabled="true" android:numeric="integer"/>
 
+
 </PreferenceScreen>

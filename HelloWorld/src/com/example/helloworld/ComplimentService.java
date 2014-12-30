@@ -20,7 +20,7 @@ import com.example.notifications.NotificationPusher;
  * A background service to push notifications based on preference timers.
  */
 public class ComplimentService extends Service {
-
+	
 	/**
 	 * Initializes the compliment service using the times specified in the
 	 * settings. This should be called each time the "preferences" are changed.

@@ -12,7 +12,7 @@ import com.example.notifications.NotificationPusher;
 import com.example.settings.SettingsActivity;
 
 public class MainActivity extends Activity {
-
+	
 	public final static String EXTRA_MESSAGE = "com.example.helloworld.MESSAGE";
 
 	@Override
@@ -30,6 +30,7 @@ public class MainActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
+
 		return true;
 	}
 
@@ -60,7 +61,7 @@ public class MainActivity extends Activity {
 		 * value in the second
 		 */
 		intent.putExtra(EXTRA_MESSAGE, message);
-		NotificationPusher.notify(this, message);
+		NotificationPusher.notify(this, message); //send notification
 		startActivity(intent); // start the activity
 	}
 
