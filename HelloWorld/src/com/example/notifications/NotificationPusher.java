@@ -37,7 +37,7 @@ public class NotificationPusher {
 					c).setSmallIcon(R.drawable.ic_launcher)
 					.setContentTitle("Happiest App In the World Notification!")
 					.setContentText(message)
-					.setPriority(NotificationCompat.PRIORITY_MIN);
+					.setPriority(NotificationCompat.PRIORITY_HIGH);
 
 			// TODO for NotificationCompat
 			// not sure why this didn't work .setVibrate(vibrate_pattern);

@@ -18,7 +18,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ComplimentService.initialize(this); // re-initialize every time because
+		String [] compliments= getResources().getStringArray(R.array.compliments_arr); //create list of compliments when the app starts
+		ComplimentService.initialize(this, compliments); // re-initialize every time because
 											// the settings may change. This
 											// feels like a hack.
 
