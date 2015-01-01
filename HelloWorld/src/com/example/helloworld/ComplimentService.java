@@ -2,8 +2,8 @@ package com.example.helloworld;
 
 import java.util.Calendar;
 import java.util.Random;
-import java.util.TimeZone;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.TreeSet;
 
 import android.app.AlarmManager;
@@ -22,8 +22,9 @@ import com.example.notifications.NotificationPusher;
  * A background service to push notifications based on preference timers.
  */
 public class ComplimentService extends Service {
-	private static String [] listOfCompliments;
+	private static String[] listOfCompliments;
 	private Set<Integer> numSet = new TreeSet<Integer>();
+
 	/**
 	 * Initializes the compliment service using the times specified in the
 	 * settings. This should be called each time the "preferences" are changed.
@@ -31,9 +32,11 @@ public class ComplimentService extends Service {
 	 * If the "Notifications" setting is not set, this will simply cancel the
 	 * background service.
 	 * 
-	 * @param c The current context
+	 * @param c
+	 *            The current context
 	 * 
-	 * @param compliments The list of compliments generated in the MainActivity class
+	 * @param compliments
+	 *            The list of compliments generated in the MainActivity class
 	 * 
 	 * @return true if service is started, false otherwise
 	 */
@@ -80,24 +83,24 @@ public class ComplimentService extends Service {
 			Log.i("HappiestAppInTheWorld",
 					"Canceled the timed Notification service.");
 		}
-		return false;	
+		return false;
 	}
 
 	@Override
 	public void onStart(Intent i, int startId) {
-		//Calendar cal = new GregorianCalendar()
-		int rand = randInt(0,listOfCompliments.length-1); //seed used to pull compliment from string array
-		
-		//if its in the set, re-random until not. else add to set
-		if(numSet.contains(rand)){
-			while(numSet.contains(rand)){
-				rand = randInt(0,listOfCompliments.length-1);
+		// Calendar cal = new GregorianCalendar()
+		int rand = randInt(0, listOfCompliments.length - 1);
+		// seed used to pull compliment from string array
+
+		// if its in the set, re-random until not. else add to set
+		if (numSet.contains(rand)) {
+			while (numSet.contains(rand)) {
+				rand = randInt(0, listOfCompliments.length - 1);
 			}
 		}
-		else{
-			numSet.add(rand);
-		}
-		
+
+		numSet.add(rand);
+
 		String message = listOfCompliments[rand];
 		NotificationPusher.notify(getBaseContext(), message);
 		Log.d("HappiestAppInTheWorld", "Notification service called.");
@@ -109,28 +112,30 @@ public class ComplimentService extends Service {
 		// Currently has no binding functionality.
 		return null;
 	}
-	
+
 	/**
-	 * Returns a pseudo-random number between min and max, inclusive.
-	 * The difference between min and max can be at most
+	 * Returns a pseudo-random number between min and max, inclusive. The
+	 * difference between min and max can be at most
 	 * <code>Integer.MAX_VALUE - 1</code>.
 	 *
-	 * @param min Minimum value
-	 * @param max Maximum value.  Must be greater than min.
+	 * @param min
+	 *            Minimum value
+	 * @param max
+	 *            Maximum value. Must be greater than min.
 	 * @return Integer between min and max, inclusive.
 	 * @see java.util.Random#nextInt(int)
 	 */
 	public static int randInt(int min, int max) {
 
-	    // NOTE: Usually this should be a field rather than a method
-	    // variable so that it is not re-seeded every call.
-	    Random rand = new Random();
+		// NOTE: Usually this should be a field rather than a method
+		// variable so that it is not re-seeded every call.
+		Random rand = new Random();
 
-	    // nextInt is normally exclusive of the top value,
-	    // so add 1 to make it inclusive
-	    int randomNum = rand.nextInt((max - min) + 1) + min;
+		// nextInt is normally exclusive of the top value,
+		// so add 1 to make it inclusive
+		int randomNum = rand.nextInt((max - min) + 1) + min;
 
-	    return randomNum;
+		return randomNum;
 	}
 
 }
