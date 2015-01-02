@@ -16,6 +16,7 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.example.HappiestConstants;
 import com.example.notifications.NotificationPusher;
 import com.example.settings.TimePreference;
 
@@ -24,7 +25,6 @@ import com.example.settings.TimePreference;
  */
 public class ComplimentService extends Service {
 	private Set<Integer> numSet = new TreeSet<Integer>();
-	private static final int alarmId = 289346; // Arbitrary but unique ID
 
 	/**
 	 * Initializes the compliment service using the times specified in the
@@ -45,8 +45,9 @@ public class ComplimentService extends Service {
 		final Intent intent = new Intent(c, ComplimentService.class);
 		// The FLAG_UPDATE_CURRENT flag and consistent ID should overwrite all
 		// previous alarms set by this service.
-		final PendingIntent pending = PendingIntent.getService(c, alarmId,
-				intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		final PendingIntent pending = PendingIntent.getService(c,
+				HappiestConstants.alarmId, intent,
+				PendingIntent.FLAG_UPDATE_CURRENT);
 		final AlarmManager alarm = (AlarmManager) c
 				.getSystemService(Context.ALARM_SERVICE);
 		alarm.cancel(pending);

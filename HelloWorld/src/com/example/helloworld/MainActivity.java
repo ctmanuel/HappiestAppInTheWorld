@@ -8,12 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.HappiestConstants;
 import com.example.notifications.NotificationPusher;
 import com.example.settings.SettingsActivity;
 
 public class MainActivity extends Activity {
-
-	public final static String EXTRA_MESSAGE = "com.example.helloworld.MESSAGE";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,7 @@ public class MainActivity extends Activity {
 		 * putExtra() method takes the key name in the first parameter and the
 		 * value in the second
 		 */
-		intent.putExtra(EXTRA_MESSAGE, message);
+		intent.putExtra(HappiestConstants.EXTRA_MESSAGE, message);
 		NotificationPusher.notify(this, message); // send notification
 		startActivity(intent); // start the activity
 	}

@@ -7,6 +7,8 @@ import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.HappiestConstants;
+
 public class DisplayMessageActivity extends Activity {
 
 	@Override
@@ -15,14 +17,8 @@ public class DisplayMessageActivity extends Activity {
 		// setContentView(R.layout.activity_display_message);
 		// Show the Up button in the action bar.
 		Intent intent = getIntent(); // get the intent
-		String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE); // get
-																			// the
-																			// message
-																			// using
-																			// unique
-																			// global
-																			// variable
-																			// id
+		String message = intent.getStringExtra(HappiestConstants.EXTRA_MESSAGE);
+		// get the message using unique global variable id
 		TextView textView = new TextView(this); // create new text view to
 												// display message
 		textView.setTextSize(40); // set text size (dur)

@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.example.HappiestConstants;
 import com.example.helloworld.DisplayMessageActivity;
 import com.example.helloworld.MainActivity;
 import com.example.helloworld.R;
@@ -22,8 +23,6 @@ import com.example.helloworld.R;
  * 
  */
 public class NotificationPusher extends Activity {
-	public final static String EXTRA_MESSAGE = "com.example.helloworld.MESSAGE";
-	private final static int mNotificationId = 001;
 
 	/**
 	 * If notifications are enabled, the given message is pushed as a
@@ -54,7 +53,7 @@ public class NotificationPusher extends Activity {
 
 			// Add intents to open activity on click of notification
 			Intent intent = new Intent(c, DisplayMessageActivity.class);
-			intent.putExtra(EXTRA_MESSAGE, message);
+			intent.putExtra(HappiestConstants.EXTRA_MESSAGE, message);
 
 			TaskStackBuilder stackBuilder = TaskStackBuilder.create(c);
 			stackBuilder.addParentStack(MainActivity.class);
@@ -69,7 +68,8 @@ public class NotificationPusher extends Activity {
 					.getSystemService(Context.NOTIFICATION_SERVICE);
 
 			// Builds the notification and issues it.
-			mNotifyMgr.notify(mNotificationId, mBuilder.build());
+			mNotifyMgr.notify(HappiestConstants.mNotificationId,
+					mBuilder.build());
 			Log.d("HappiestAppInTheWorld", "Notification sent: '" + message
 					+ "'");
 			return true;
