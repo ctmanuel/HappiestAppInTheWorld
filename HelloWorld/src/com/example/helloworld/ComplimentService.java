@@ -17,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.example.notifications.NotificationPusher;
+import com.example.settings.TimePreference;
 
 /**
  * A background service to push notifications based on preference timers.
@@ -64,10 +65,9 @@ public class ComplimentService extends Service {
 			try { // TODO: Enforce a valid input for notification_hr preference.
 					// The user can set the preference to blank. Handled with a
 					// hack to catch the exception....
+				calendar.set(Calendar.HOUR_OF_DAY, TimePreference.ReturnHour());
 				calendar.set(Calendar.HOUR_OF_DAY,
-						Integer.parseInt(SP.getString("notification_hr", "12")));
-				calendar.set(Calendar.MINUTE, Integer.parseInt(SP.getString(
-						"notification_min", "12")));
+						TimePreference.ReturnMinute());
 			} catch (NumberFormatException nfe) {
 				calendar.set(Calendar.HOUR_OF_DAY, 12);
 				calendar.set(Calendar.MINUTE, 12);

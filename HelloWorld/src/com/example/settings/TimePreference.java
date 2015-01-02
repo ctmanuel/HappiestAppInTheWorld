@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.TimePicker;
 
@@ -13,8 +14,8 @@ import android.widget.TimePicker;
  * 
  */
 public class TimePreference extends DialogPreference {
-	private int lastHour = 0; // previous hour
-	private int lastMinute = 0; // previous minute
+	private static int lastHour = 0; // previous hour
+	private static int lastMinute = 0; // previous minute
 	private TimePicker picker = null; // global time picker
 
 	/**
@@ -114,5 +115,15 @@ public class TimePreference extends DialogPreference {
 
 		lastHour = getHour(time);
 		lastMinute = getMinute(time);
+	}
+
+	public static int ReturnHour() {
+		Log.i("Time preference hour", Integer.toString(lastHour));
+		return lastHour;
+	}
+
+	public static int ReturnMinute() {
+		Log.i("Time preference hour", Integer.toString(lastMinute));
+		return lastMinute;
 	}
 }

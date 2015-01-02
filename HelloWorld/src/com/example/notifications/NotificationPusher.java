@@ -2,7 +2,6 @@ package com.example.notifications;
 
 import android.app.Activity;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -18,7 +17,7 @@ import com.example.helloworld.R;
  * 
  */
 public class NotificationPusher extends Activity {
-	private static PendingIntent resultPendingIntent;
+	// private static PendingIntent resultPendingIntent;
 
 	/**
 	 * If notifications are enabled, the given message is pushed as a
@@ -47,7 +46,7 @@ public class NotificationPusher extends Activity {
 			// Use ".setNumber" to note the number of stacked notifications
 			// For android 5.0, use .setCategory for category stuff
 			// Init();
-			mBuilder.setContentIntent(resultPendingIntent);
+			// mBuilder.setContentIntent(resultPendingIntent);
 
 			// mBuilder.setContentIntent(this.Init());
 			// Sets an ID for the notification - so that we update previously
