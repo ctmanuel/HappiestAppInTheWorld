@@ -101,7 +101,7 @@ public class ComplimentService extends Service {
 
 		numSet.add(rand);
 
-		String message = listOfCompliments[rand];
+		String message = getResources().getStringArray(R.array.compliments_arr)[rand];
 		NotificationPusher.notify(getBaseContext(), message);
 		Log.d("HappiestAppInTheWorld", "Notification service called.");
 		Log.d("HappiestAppInTheWorld", message);
