@@ -12,14 +12,14 @@ import com.example.notifications.NotificationPusher;
 import com.example.settings.SettingsActivity;
 
 public class MainActivity extends Activity {
-	
+
 	public final static String EXTRA_MESSAGE = "com.example.helloworld.MESSAGE";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		String [] compliments= getResources().getStringArray(R.array.compliments_arr); //create list of compliments when the app starts
-		ComplimentService.initialize(this, compliments); // re-initialize every time because
+
+		ComplimentService.initialize(this); // re-initialize every time because
 											// the settings may change. This
 											// feels like a hack.
 
@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
 		 * value in the second
 		 */
 		intent.putExtra(EXTRA_MESSAGE, message);
-		NotificationPusher.notify(this, message); //send notification
+		NotificationPusher.notify(this, message); // send notification
 		startActivity(intent); // start the activity
 	}
 

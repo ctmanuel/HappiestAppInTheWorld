@@ -22,7 +22,6 @@ import com.example.notifications.NotificationPusher;
  * A background service to push notifications based on preference timers.
  */
 public class ComplimentService extends Service {
-	private static String[] listOfCompliments;
 	private Set<Integer> numSet = new TreeSet<Integer>();
 
 	/**
@@ -40,9 +39,8 @@ public class ComplimentService extends Service {
 	 * 
 	 * @return true if service is started, false otherwise
 	 */
-	static boolean initialize(Context c, String[] compliments) {
+	static boolean initialize(Context c) {
 		final Intent intent = new Intent(c, ComplimentService.class);
-		listOfCompliments = compliments;
 		final PendingIntent pending = PendingIntent.getService(c, 0, intent, 0);
 		final AlarmManager alarm = (AlarmManager) c
 				.getSystemService(Context.ALARM_SERVICE);
@@ -89,13 +87,17 @@ public class ComplimentService extends Service {
 	@Override
 	public void onStart(Intent i, int startId) {
 		// Calendar cal = new GregorianCalendar()
-		int rand = randInt(0, listOfCompliments.length - 1);
+		int rand = randInt(
+				0,
+				getResources().getStringArray(R.array.compliments_arr).length - 1);
 		// seed used to pull compliment from string array
 
 		// if its in the set, re-random until not. else add to set
 		if (numSet.contains(rand)) {
 			while (numSet.contains(rand)) {
-				rand = randInt(0, listOfCompliments.length - 1);
+				rand = randInt(
+						0,
+						getResources().getStringArray(R.array.compliments_arr).length - 1);
 			}
 		}
 
@@ -117,7 +119,7 @@ public class ComplimentService extends Service {
 	 * Returns a pseudo-random number between min and max, inclusive. The
 	 * difference between min and max can be at most
 	 * <code>Integer.MAX_VALUE - 1</code>.
-	 *
+	 * 
 	 * @param min
 	 *            Minimum value
 	 * @param max
