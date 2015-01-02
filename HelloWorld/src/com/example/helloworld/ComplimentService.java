@@ -23,6 +23,7 @@ import com.example.notifications.NotificationPusher;
  */
 public class ComplimentService extends Service {
 	private Set<Integer> numSet = new TreeSet<Integer>();
+	private static final int alarmId = 289346; // Arbitrary but unique ID
 
 	/**
 	 * Initializes the compliment service using the times specified in the
@@ -41,7 +42,10 @@ public class ComplimentService extends Service {
 	 */
 	static boolean initialize(Context c) {
 		final Intent intent = new Intent(c, ComplimentService.class);
-		final PendingIntent pending = PendingIntent.getService(c, 0, intent, 0);
+		// The FLAG_UPDATE_CURRENT flag and consistent ID should overwrite all
+		// previous alarms set by this service.
+		final PendingIntent pending = PendingIntent.getService(c, alarmId,
+				intent, PendingIntent.FLAG_UPDATE_CURRENT);
 		final AlarmManager alarm = (AlarmManager) c
 				.getSystemService(Context.ALARM_SERVICE);
 		alarm.cancel(pending);
