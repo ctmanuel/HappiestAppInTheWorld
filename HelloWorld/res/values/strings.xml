@@ -8,6 +8,6 @@
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
     <string name="title_activity_display_message">My Message</string>
-    <string name="time_selected"></string>
+    <string name="timePrefA_title">Use TimePicker</string>
 
 </resources>

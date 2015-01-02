@@ -3,25 +3,23 @@ package com.example.notifications;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.example.helloworld.MainActivity;
 import com.example.helloworld.R;
 
 /**
  * Since this app really one has one function, here we have a centralized usage
  * of the notification system.
  * 
- *
+ * 
  */
-public class NotificationPusher extends Activity{
+public class NotificationPusher extends Activity {
 	private static PendingIntent resultPendingIntent;
+
 	/**
 	 * If notifications are enabled, the given message is pushed as a
 	 * notification
@@ -48,10 +46,10 @@ public class NotificationPusher extends Activity{
 			// not sure why this didn't work .setVibrate(vibrate_pattern);
 			// Use ".setNumber" to note the number of stacked notifications
 			// For android 5.0, use .setCategory for category stuff
-			//Init();
+			// Init();
 			mBuilder.setContentIntent(resultPendingIntent);
 
-			//mBuilder.setContentIntent(this.Init());
+			// mBuilder.setContentIntent(this.Init());
 			// Sets an ID for the notification - so that we update previously
 			// sent
 			// notifications
@@ -69,22 +67,23 @@ public class NotificationPusher extends Activity{
 		}
 		return false;
 	}
-	
-	public static void Init(){
-		//Intent resultIntent = new Intent(this, MainActivity.class);
-		// The stack builder object will contain an artificial back stack for the
+
+	public static void Init() {
+		// Intent resultIntent = new Intent(this, MainActivity.class);
+		// The stack builder object will contain an artificial back stack for
+		// the
 		// started Activity.
 		// This ensures that navigating backward from the Activity leads out of
 		// your application to the Home screen.
-		//TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+		// TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 		// Adds the back stack for the Intent (but not the Intent itself)
-		//stackBuilder.addParentStack(MainActivity.class);
+		// stackBuilder.addParentStack(MainActivity.class);
 		// Adds the Intent that starts the Activity to the top of the stack
-		//stackBuilder.addNextIntent(resultIntent);
-		//resultPendingIntent =
-		//        stackBuilder.getPendingIntent(
-		//            0,
-		//            PendingIntent.FLAG_UPDATE_CURRENT);
+		// stackBuilder.addNextIntent(resultIntent);
+		// resultPendingIntent =
+		// stackBuilder.getPendingIntent(
+		// 0,
+		// PendingIntent.FLAG_UPDATE_CURRENT);
 	}
 
 }
