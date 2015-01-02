@@ -2,12 +2,17 @@ package com.example.notifications;
 
 import android.app.Activity;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.example.helloworld.DisplayMessageActivity;
+import com.example.helloworld.MainActivity;
 import com.example.helloworld.R;
 
 /**
@@ -17,7 +22,8 @@ import com.example.helloworld.R;
  * 
  */
 public class NotificationPusher extends Activity {
-	// private static PendingIntent resultPendingIntent;
+	public final static String EXTRA_MESSAGE = "com.example.helloworld.MESSAGE";
+	private final static int mNotificationId = 001;
 
 	/**
 	 * If notifications are enabled, the given message is pushed as a
@@ -45,14 +51,18 @@ public class NotificationPusher extends Activity {
 			// not sure why this didn't work .setVibrate(vibrate_pattern);
 			// Use ".setNumber" to note the number of stacked notifications
 			// For android 5.0, use .setCategory for category stuff
-			// Init();
-			// mBuilder.setContentIntent(resultPendingIntent);
 
-			// mBuilder.setContentIntent(this.Init());
-			// Sets an ID for the notification - so that we update previously
-			// sent
-			// notifications
-			int mNotificationId = 001;
+			// Add intents to open activity on click of notification
+			Intent intent = new Intent(c, DisplayMessageActivity.class);
+			intent.putExtra(EXTRA_MESSAGE, message);
+
+			TaskStackBuilder stackBuilder = TaskStackBuilder.create(c);
+			stackBuilder.addParentStack(MainActivity.class);
+			stackBuilder.addNextIntent(intent);
+			PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(
+					0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+			mBuilder.setContentIntent(resultPendingIntent);
 
 			// Gets an instance of the NotificationManager service
 			NotificationManager mNotifyMgr = (NotificationManager) c
@@ -65,24 +75,6 @@ public class NotificationPusher extends Activity {
 			return true;
 		}
 		return false;
-	}
-
-	public static void Init() {
-		// Intent resultIntent = new Intent(this, MainActivity.class);
-		// The stack builder object will contain an artificial back stack for
-		// the
-		// started Activity.
-		// This ensures that navigating backward from the Activity leads out of
-		// your application to the Home screen.
-		// TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-		// Adds the back stack for the Intent (but not the Intent itself)
-		// stackBuilder.addParentStack(MainActivity.class);
-		// Adds the Intent that starts the Activity to the top of the stack
-		// stackBuilder.addNextIntent(resultIntent);
-		// resultPendingIntent =
-		// stackBuilder.getPendingIntent(
-		// 0,
-		// PendingIntent.FLAG_UPDATE_CURRENT);
 	}
 
 }
