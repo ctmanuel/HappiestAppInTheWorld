@@ -27,7 +27,6 @@ public class TimePreference extends DialogPreference {
 	 */
 	public static int getHour(String time) {
 		String[] pieces = time.split(":");
-
 		return (Integer.parseInt(pieces[0]));
 	}
 
@@ -54,7 +53,6 @@ public class TimePreference extends DialogPreference {
 	 */
 	public TimePreference(Context ctxt, AttributeSet attrs) {
 		super(ctxt, attrs);
-
 		// add buttons
 		setPositiveButtonText("Set");
 		setNegativeButtonText("Cancel");

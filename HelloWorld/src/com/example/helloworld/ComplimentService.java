@@ -25,7 +25,7 @@ import com.example.settings.TimePreference;
 /**
  * A background service to push notifications based on preference timers.
  */
-public class ComplimentService extends Service {
+public class ComplimentService extends Service implements HappiestConstants {
 	private Set<Integer> numSet = new TreeSet<Integer>();
 
 	/**
@@ -64,25 +64,24 @@ public class ComplimentService extends Service {
 			try { // TODO: Enforce a valid input for notification_hr preference.
 					// The user can set the preference to blank. Handled with a
 					// hack to catch the exception....
-				calendar.set(Calendar.HOUR_OF_DAY, TimePreference.ReturnHour());
-				calendar.set(Calendar.HOUR_OF_DAY,
-						TimePreference.ReturnMinute());
+				String time = SP.getString("timePrefA_Key", "12:00");
+				calendar.set(Calendar.HOUR_OF_DAY, TimePreference.getHour(time));
+				calendar.set(Calendar.MINUTE, TimePreference.getMinute(time));
+				Log.d(APP_TAG, "Time of next alarm: " + time);
 			} catch (NumberFormatException nfe) {
 				calendar.set(Calendar.HOUR_OF_DAY, 12);
 				calendar.set(Calendar.MINUTE, 12);
-				Log.w("HappiestAppInTheWorld",
+				Log.w(APP_TAG,
 						"Invalid preference values for notification hour or minutes.");
 			}
 			alarm.setInexactRepeating(AlarmManager.RTC,
 					calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
 					pending);
-			Log.i("HappiestAppInTheWorld",
-					"Started the timed Notifications service.");
+			Log.i(APP_TAG, "Started the timed Notifications service.");
 
 			return true;
 		} else {
-			Log.i("HappiestAppInTheWorld",
-					"Canceled the timed Notification service.");
+			Log.i(APP_TAG, "Canceled the timed Notification service.");
 		}
 		return false;
 	}
@@ -95,13 +94,12 @@ public class ComplimentService extends Service {
 				.getDefaultSharedPreferences(this);
 		String today = new SimpleDateFormat("dd", Locale.US).format(calendar
 				.getTime());
-		Log.d(HappiestConstants.APP_TAG, "Compliment service date: " + today);
+		Log.d(APP_TAG, "Today's date: " + today);
 
 		// Return early if an alarm already went off today
 		if (today.equals(SP.getString(HappiestConstants.last_day,
 				"not set yet..."))) {
-			Log.w(HappiestConstants.APP_TAG,
-					"Already sent a compliment today...");
+			Log.w(APP_TAG, "Already sent a compliment today...");
 			return;
 		}
 
@@ -110,11 +108,9 @@ public class ComplimentService extends Service {
 		editor.putString(HappiestConstants.last_day, today);
 		editor.commit();
 
-		// Calendar cal = new GregorianCalendar()
 		int rand = randInt(
 				0,
 				getResources().getStringArray(R.array.compliments_arr).length - 1);
-		// seed used to pull compliment from string array
 
 		// if its in the set, re-random until not. else add to set
 		if (numSet.contains(rand)) {
@@ -129,8 +125,7 @@ public class ComplimentService extends Service {
 
 		String message = getResources().getStringArray(R.array.compliments_arr)[rand];
 		NotificationPusher.notify(getBaseContext(), message);
-		Log.d("HappiestAppInTheWorld", "Notification service called.");
-		Log.d("HappiestAppInTheWorld", message);
+		Log.d(APP_TAG, "Notification service called: " + message);
 	}
 
 	@Override
