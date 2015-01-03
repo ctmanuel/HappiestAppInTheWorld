@@ -17,4 +17,6 @@ public interface HappiestConstants {
 	 * File name for shared preferences... not used yet
 	 */
 	public final static String PREFS = "HappiestPreferences";
+
+	public final static String time_pref_KEY = "timePrefA_Key";
 }

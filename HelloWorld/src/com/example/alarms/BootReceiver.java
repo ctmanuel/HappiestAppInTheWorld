@@ -30,7 +30,7 @@ public class BootReceiver extends BroadcastReceiver {
 	 * @param c
 	 *            The current context
 	 */
-	static void enableBootReceiver(Context c) {
+	public static void enableBootReceiver(Context c) {
 		setBootReceiverState(c, PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
 	}
 
@@ -41,7 +41,7 @@ public class BootReceiver extends BroadcastReceiver {
 	 * @param c
 	 *            The current context
 	 */
-	static void disableBootReceiver(Context c) {
+	public static void disableBootReceiver(Context c) {
 		setBootReceiverState(c, PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
 	}
 

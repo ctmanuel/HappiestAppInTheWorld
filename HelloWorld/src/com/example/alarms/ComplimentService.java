@@ -45,12 +45,7 @@ public class ComplimentService extends Service implements HappiestConstants {
 	 * @return true if service is started, false otherwise
 	 */
 	public static boolean initialize(Context c) {
-		final Intent intent = new Intent(c, ComplimentService.class);
-		// The FLAG_UPDATE_CURRENT flag and consistent ID should overwrite all
-		// previous alarms set by this service.
-		final PendingIntent pending = PendingIntent.getService(c,
-				HappiestConstants.alarmId, intent,
-				PendingIntent.FLAG_UPDATE_CURRENT);
+		final PendingIntent pending = getAlarmIntent(c);
 		final AlarmManager alarm = (AlarmManager) c
 				.getSystemService(Context.ALARM_SERVICE);
 		alarm.cancel(pending);
@@ -65,7 +60,7 @@ public class ComplimentService extends Service implements HappiestConstants {
 			try { // TODO: Enforce a valid input for notification_hr preference.
 					// The user can set the preference to blank. Handled with a
 					// hack to catch the exception....
-				String time = SP.getString("timePrefA_Key", "12:00");
+				String time = SP.getString(time_pref_KEY, "12:00");
 				calendar.set(Calendar.HOUR_OF_DAY, TimePreference.getHour(time));
 				calendar.set(Calendar.MINUTE, TimePreference.getMinute(time));
 				Log.d(APP_TAG, "Time of next alarm: " + time);
@@ -84,6 +79,32 @@ public class ComplimentService extends Service implements HappiestConstants {
 			Log.i(APP_TAG, "Canceled the timed Notification service.");
 		}
 		return false;
+	}
+
+	/**
+	 * Makes a pending intent for an alarm
+	 * 
+	 * @param c
+	 * @return
+	 */
+	private static PendingIntent getAlarmIntent(Context c) {
+		final Intent intent = new Intent(c, ComplimentService.class);
+		// The FLAG_UPDATE_CURRENT flag and consistent ID should overwrite all
+		// previous alarms set by this service.
+		return PendingIntent.getService(c, HappiestConstants.alarmId, intent,
+				PendingIntent.FLAG_UPDATE_CURRENT);
+	}
+
+	/**
+	 * Cancel alarms previously set
+	 * 
+	 * @param c
+	 */
+	public static void cancelAlarms(Context c) {
+		final AlarmManager alarm = (AlarmManager) c
+				.getSystemService(Context.ALARM_SERVICE);
+		alarm.cancel(getAlarmIntent(c));
+		Log.i(APP_TAG, "Canceled the timed Notification service.");
 	}
 
 	@Override
