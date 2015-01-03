@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.HappiestConstants;
+import com.example.alarms.ComplimentService;
 import com.example.notifications.NotificationPusher;
 import com.example.settings.SettingsActivity;
 

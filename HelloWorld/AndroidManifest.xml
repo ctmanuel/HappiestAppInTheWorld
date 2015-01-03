@@ -3,7 +3,9 @@
     package="com.example.helloworld"
     android:versionCode="1"
     android:versionName="1.0" >
-
+    
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    
     <uses-sdk
         android:minSdkVersion="17"
         android:targetSdkVersion="17" />
@@ -30,10 +32,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.helloworld.MainActivity" />
         </activity>
+       
         <activity android:name="com.example.settings.SettingsActivity" android:enabled="true" android:label="@string/action_settings" android:parentActivityName="com.example.helloworld.MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.example.helloworld.MainActivity"/>
         </activity>
-        <service android:name="ComplimentService"></service>
+        
+        <service android:name="ComplimentService"/>
+        
+        <receiver 
+            android:name=".SampleBootReceiver"
+        	android:enabled="true">
+   			<intent-filter>
+       			<action android:name="android.intent.action.BOOT_COMPLETED"></action>
+    		</intent-filter>
+		</receiver>
     </application>
 
 </manifest>

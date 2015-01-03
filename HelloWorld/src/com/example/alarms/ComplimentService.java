@@ -1,4 +1,4 @@
-package com.example.helloworld;
+package com.example.alarms;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -19,6 +19,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.example.HappiestConstants;
+import com.example.helloworld.R;
 import com.example.notifications.NotificationPusher;
 import com.example.settings.TimePreference;
 
@@ -43,7 +44,7 @@ public class ComplimentService extends Service implements HappiestConstants {
 	 * 
 	 * @return true if service is started, false otherwise
 	 */
-	static boolean initialize(Context c) {
+	public static boolean initialize(Context c) {
 		final Intent intent = new Intent(c, ComplimentService.class);
 		// The FLAG_UPDATE_CURRENT flag and consistent ID should overwrite all
 		// previous alarms set by this service.
@@ -74,9 +75,8 @@ public class ComplimentService extends Service implements HappiestConstants {
 				Log.w(APP_TAG,
 						"Invalid preference values for notification hour or minutes.");
 			}
-			alarm.setInexactRepeating(AlarmManager.RTC,
-					calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
-					pending);
+			alarm.setRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
+					AlarmManager.INTERVAL_DAY, pending);
 			Log.i(APP_TAG, "Started the timed Notifications service.");
 
 			return true;
