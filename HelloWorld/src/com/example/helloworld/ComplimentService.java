@@ -1,6 +1,8 @@
 package com.example.helloworld;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
 import java.util.TimeZone;
@@ -54,13 +56,9 @@ public class ComplimentService extends Service {
 
 		SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(c);
 		if (SP.getBoolean("Notifications", false)) {
-			// On a repeating timer
-			// long interval = 1000;// milliseconds
-			// alarm.setInexactRepeating(AlarmManager.RTC,
-			// SystemClock.elapsedRealtime(), interval, pending);
-
-			// Set a daily alarm to the given time from preferences
 			Calendar calendar = Calendar.getInstance();
+
+			// Sending today's first notification
 			calendar.setTimeInMillis(System.currentTimeMillis());
 			calendar.setTimeZone(TimeZone.getDefault());
 			try { // TODO: Enforce a valid input for notification_hr preference.
@@ -91,6 +89,27 @@ public class ComplimentService extends Service {
 
 	@Override
 	public void onStart(Intent i, int startId) {
+		// Check to make sure we haven't sent a notification today
+		Calendar calendar = Calendar.getInstance();
+		SharedPreferences SP = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		String today = new SimpleDateFormat("dd", Locale.US).format(calendar
+				.getTime());
+		Log.d(HappiestConstants.APP_TAG, "Compliment service date: " + today);
+
+		// Return early if an alarm already went off today
+		if (today.equals(SP.getString(HappiestConstants.last_day,
+				"not set yet..."))) {
+			Log.w(HappiestConstants.APP_TAG,
+					"Already sent a compliment today...");
+			return;
+		}
+
+		// Save today as the last day that a compliment was sent
+		SharedPreferences.Editor editor = SP.edit();
+		editor.putString(HappiestConstants.last_day, today);
+		editor.commit();
+
 		// Calendar cal = new GregorianCalendar()
 		int rand = randInt(
 				0,
