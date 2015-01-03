@@ -6,7 +6,7 @@ package com.example.settings;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
-import com.example.helloworld.R;
+import com.example.R;
 
 public class SettingsFragment extends PreferenceFragment {
 	@Override

@@ -12,9 +12,9 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.example.HappiestConstants;
+import com.example.R;
 import com.example.helloworld.DisplayMessageActivity;
 import com.example.helloworld.MainActivity;
-import com.example.helloworld.R;
 
 /**
  * Since this app really one has one function, here we have a centralized usage

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.HappiestConstants;
+import com.example.R;
 import com.example.notifications.NotificationPusher;
 import com.example.settings.SettingsActivity;
 

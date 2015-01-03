@@ -5,12 +5,16 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.util.Log;
+
+import com.example.HappiestConstants;
 
 /**
  * Receives notifications that the device has recently booted, the restarts the
  * alarm service because those get canceled when a device is turned off.
  */
-public class BootReceiver extends BroadcastReceiver {
+public class BootReceiver extends BroadcastReceiver implements
+		HappiestConstants {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -54,9 +58,11 @@ public class BootReceiver extends BroadcastReceiver {
 	 *            State to set it to
 	 */
 	private static void setBootReceiverState(Context c, int state) {
-		ComponentName receiver = new ComponentName(c, BootReceiver.class);
+		ComponentName receiver = new ComponentName(c,
+				BootReceiver.class.getName());
+		Log.i(APP_TAG,
+				receiver.getPackageName() + "  " + receiver.getClassName());
 		PackageManager pm = c.getPackageManager();
-
 		pm.setComponentEnabledSetting(receiver,
 				PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
 				PackageManager.DONT_KILL_APP);

@@ -19,7 +19,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.example.HappiestConstants;
-import com.example.helloworld.R;
+import com.example.R;
 import com.example.notifications.NotificationPusher;
 import com.example.settings.TimePreference;
 
