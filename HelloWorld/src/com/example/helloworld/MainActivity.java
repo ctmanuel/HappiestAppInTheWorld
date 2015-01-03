@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.HappiestConstants;
 import com.example.alarms.ComplimentService;
@@ -14,6 +15,7 @@ import com.example.notifications.NotificationPusher;
 import com.example.settings.SettingsActivity;
 
 public class MainActivity extends Activity {
+	public static TextView countDown;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +24,9 @@ public class MainActivity extends Activity {
 		ComplimentService.initialize(this); // re-initialize every time because
 											// the settings may change. This
 											// feels like a hack.
-
 		setContentView(R.layout.activity_main);
+		countDown = (TextView) findViewById(R.id.textViewTime);
+		countDown.setText("00:00:00");
 
 	}
 

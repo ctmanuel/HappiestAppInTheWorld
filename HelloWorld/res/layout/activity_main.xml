@@ -29,5 +29,11 @@
         android:layout_height="wrap_content"
         android:text="@string/button_send" 
         android:onClick="sendMessage"/>
+    <TextView
+        android:id="@+id/textViewTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/timer" 
+     	android:textSize="25sp"/>
 
 </LinearLayout>

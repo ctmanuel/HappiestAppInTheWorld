@@ -1,12 +1,15 @@
 package com.example.settings;
 
+import java.util.Calendar;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.TimePicker;
+
+import com.example.Counter;
 
 /**
  * This class is used to manage the time picker in the settings page
@@ -17,6 +20,7 @@ public class TimePreference extends DialogPreference {
 	private static int lastHour = 0; // previous hour
 	private static int lastMinute = 0; // previous minute
 	private TimePicker picker = null; // global time picker
+	private static Counter counter;
 
 	/**
 	 * Returns the hour in the given time string
@@ -58,6 +62,15 @@ public class TimePreference extends DialogPreference {
 		setNegativeButtonText("Cancel");
 	}
 
+	/**
+	 * Calculates the remaining time until the next notification
+	 * 
+	 * @return
+	 */
+	public static String getRemainingTime() {
+		return null;
+	}
+
 	@Override
 	protected View onCreateDialogView() {
 		picker = new TimePicker(getContext()); // new picker view
@@ -89,6 +102,11 @@ public class TimePreference extends DialogPreference {
 			if (callChangeListener(time)) {
 				persistString(time);
 			}
+			// calculate time to next alarm
+			int TotalTime = (((lastMinute / 60) + lastHour) * 3600000)
+					- getCurrentTime();
+			counter = new Counter(Math.abs(TotalTime), 1000);
+			counter.start();
 		}
 	}
 
@@ -115,13 +133,27 @@ public class TimePreference extends DialogPreference {
 		lastMinute = getMinute(time);
 	}
 
-	public static int ReturnHour() {
-		Log.i("Time preference hour", Integer.toString(lastHour));
-		return lastHour;
-	}
+	/**
+	 * Gets the current time from a new calendar object
+	 * 
+	 * @return The current hour, minute, and second in milliseconds
+	 */
+	private static int getCurrentTime() {
 
-	public static int ReturnMinute() {
-		Log.i("Time preference hour", Integer.toString(lastMinute));
-		return lastMinute;
+		Calendar c = Calendar.getInstance();
+		int secondsToMilli = c.get(Calendar.SECOND) * 1000; // 1000 milliseconds
+															// in second
+		int minutesToMilli = c.get(Calendar.MINUTE) * 60000; // 60000
+																// milliseconds
+																// in minute
+		int hoursToMilli = (c.get(Calendar.HOUR) + 12) * 3600000; // add 12 cuz
+																	// hour only
+																	// goes from
+																	// 1-12;
+																	// 3600000
+																	// milli in
+																	// hr
+		return secondsToMilli + minutesToMilli + hoursToMilli; // total time in
+																// milliseconds
 	}
 }
