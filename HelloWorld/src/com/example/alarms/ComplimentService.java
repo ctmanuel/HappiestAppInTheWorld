@@ -89,9 +89,10 @@ public class ComplimentService extends Service implements HappiestConstants {
 	 */
 	private static PendingIntent getAlarmIntent(Context c) {
 		final Intent intent = new Intent(c, ComplimentService.class);
+		intent.putExtra("alarmId", alarmId);
 		// The FLAG_UPDATE_CURRENT flag and consistent ID should overwrite all
 		// previous alarms set by this service.
-		return PendingIntent.getService(c, HappiestConstants.alarmId, intent,
+		return PendingIntent.getService(c, alarmId, intent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
 	}
 
@@ -109,45 +110,54 @@ public class ComplimentService extends Service implements HappiestConstants {
 
 	@Override
 	public int onStartCommand(Intent i, int flags, int startId) {
-		// Check to make sure we haven't sent a notification today
-		Calendar calendar = Calendar.getInstance();
-		SharedPreferences SP = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		String today = new SimpleDateFormat("dd", Locale.US).format(calendar
-				.getTime());
-		Log.i(APP_TAG, "Today's date: " + today);
+		// TODO a better Intent filter could probably be made...
+		if (i != null && i.getIntExtra("alarmId", alarmId - 1) == alarmId) {
 
-		// Return early if an alarm already went off today
-		if (today.equals(SP.getString(HappiestConstants.last_day,
-				"not set yet..."))
-				&& !SP.getBoolean("dev_override_daily", false)) {
-			Log.w(APP_TAG, "Already sent a compliment today...");
-			return START_STICKY;
-		}
+			// Check to make sure we haven't sent a notification today
+			Calendar calendar = Calendar.getInstance();
+			SharedPreferences SP = PreferenceManager
+					.getDefaultSharedPreferences(this);
+			String today = new SimpleDateFormat("dd", Locale.US)
+					.format(calendar.getTime());
+			Log.i(APP_TAG, "Today's date: " + today);
 
-		// Save today as the last day that a compliment was sent
-		SharedPreferences.Editor editor = SP.edit();
-		editor.putString(HappiestConstants.last_day, today);
-		editor.commit();
-
-		int rand = randInt(
-				0,
-				getResources().getStringArray(R.array.compliments_arr).length - 1);
-
-		// if its in the set, re-random until not. else add to set
-		if (numSet.contains(rand)) {
-			while (numSet.contains(rand)) {
-				rand = randInt(
-						0,
-						getResources().getStringArray(R.array.compliments_arr).length - 1);
+			// Return early if an alarm already went off today
+			if (today.equals(SP.getString(HappiestConstants.last_day,
+					"not set yet..."))
+					&& !SP.getBoolean("dev_override_daily", false)) {
+				Log.w(APP_TAG, "Already sent a compliment today...");
+				return START_STICKY;
 			}
+
+			// Save today as the last day that a compliment was sent
+			SharedPreferences.Editor editor = SP.edit();
+			editor.putString(HappiestConstants.last_day, today);
+			editor.commit();
+
+			int rand = randInt(
+					0,
+					getResources().getStringArray(R.array.compliments_arr).length - 1);
+
+			// if its in the set, re-random until not. else add to set
+			if (numSet.contains(rand)) {
+				while (numSet.contains(rand)) {
+					rand = randInt(
+							0,
+							getResources().getStringArray(
+									R.array.compliments_arr).length - 1);
+				}
+			}
+
+			numSet.add(rand);
+
+			String message = getResources().getStringArray(
+					R.array.compliments_arr)[rand];
+			NotificationPusher.notify(getBaseContext(), message);
+		} else {
+			Log.d(APP_TAG, "Not sure why this got called...");
 		}
-
-		numSet.add(rand);
-
-		String message = getResources().getStringArray(R.array.compliments_arr)[rand];
-		NotificationPusher.notify(getBaseContext(), message);
 		return START_STICKY;
+
 	}
 
 	@Override
