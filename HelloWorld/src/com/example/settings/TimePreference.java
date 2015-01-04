@@ -103,9 +103,12 @@ public class TimePreference extends DialogPreference {
 				persistString(time);
 			}
 			// calculate time to next alarm
-			int TotalTime = (((lastMinute / 60) + lastHour) * 3600000)
+			int TotalTime = ((lastMinute * 60000) + (lastHour * 3600000))
 					- getCurrentTime();
-			counter = new Counter(Math.abs(TotalTime), 1000);
+			if (TotalTime < 0)
+				TotalTime = 86400000 - Math.abs(TotalTime);
+
+			counter = new Counter(TotalTime, 1000);
 			counter.start();
 		}
 	}
