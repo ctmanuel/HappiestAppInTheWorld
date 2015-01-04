@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     <ListPreference android:key="level_of_niceness" android:title="Level of Niceness" android:summary="How nice would you like this to be?" android:entryValues="@array/niceness_levels" android:entries="@array/niceness_levels" android:defaultValue="Nice"/>
-    <CheckBoxPreference android:enabled="true" android:title="Notifications" android:selectable="true" android:summary="Would you like to allow notifications?" android:key="Notifications" android:defaultValue="false" />
+    <CheckBoxPreference 
+        android:enabled="true" 
+        android:title="Notifications" 
+        android:selectable="true" 
+        android:summary="Would you like to allow notifications?" 
+        android:key="Notifications" 
+        android:defaultValue="false" />
     
     <com.example.settings.TimePreference
         android:key="timePrefA_Key"
         android:title="@string/timePrefA_title"
         android:summary="Select the time you would like to recieve compliments"/>
+
+    
+    <PreferenceCategory 
+        android:title="Developer Options">    
+        <CheckBoxPreference 
+	        android:key="dev_override_daily"
+	        android:title="DEV Override daily"
+	        android:summary="Override the 'only one compliment' per day setting"
+	        android:defaultValue="false"
+	        android:enabled="true"/>
+    </PreferenceCategory>
     
 </PreferenceScreen>

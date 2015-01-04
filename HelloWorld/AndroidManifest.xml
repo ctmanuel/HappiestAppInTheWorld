@@ -37,9 +37,9 @@
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.example.helloworld.MainActivity"/>
         </activity>
         
-        <service android:name="ComplimentService"/>
-        
-        <receiver 
+		<service android:name="com.example.alarms.ComplimentService"/>        
+      
+		<receiver 
             android:name="com.example.alarms.BootReceiver"
         	android:enabled="true">
    			<intent-filter>

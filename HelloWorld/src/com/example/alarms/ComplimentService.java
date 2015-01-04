@@ -63,7 +63,7 @@ public class ComplimentService extends Service implements HappiestConstants {
 				String time = SP.getString(time_pref_KEY, "12:00");
 				calendar.set(Calendar.HOUR_OF_DAY, TimePreference.getHour(time));
 				calendar.set(Calendar.MINUTE, TimePreference.getMinute(time));
-				Log.d(APP_TAG, "Time of next alarm: " + time);
+				Log.i(APP_TAG, "Time of next alarm: " + time);
 			} catch (NumberFormatException nfe) {
 				calendar.set(Calendar.HOUR_OF_DAY, 12);
 				calendar.set(Calendar.MINUTE, 12);
@@ -108,20 +108,21 @@ public class ComplimentService extends Service implements HappiestConstants {
 	}
 
 	@Override
-	public void onStart(Intent i, int startId) {
+	public int onStartCommand(Intent i, int flags, int startId) {
 		// Check to make sure we haven't sent a notification today
 		Calendar calendar = Calendar.getInstance();
 		SharedPreferences SP = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		String today = new SimpleDateFormat("dd", Locale.US).format(calendar
 				.getTime());
-		Log.d(APP_TAG, "Today's date: " + today);
+		Log.i(APP_TAG, "Today's date: " + today);
 
 		// Return early if an alarm already went off today
 		if (today.equals(SP.getString(HappiestConstants.last_day,
-				"not set yet..."))) {
+				"not set yet..."))
+				&& !SP.getBoolean("dev_override_daily", false)) {
 			Log.w(APP_TAG, "Already sent a compliment today...");
-			return;
+			return START_STICKY;
 		}
 
 		// Save today as the last day that a compliment was sent
@@ -146,7 +147,7 @@ public class ComplimentService extends Service implements HappiestConstants {
 
 		String message = getResources().getStringArray(R.array.compliments_arr)[rand];
 		NotificationPusher.notify(getBaseContext(), message);
-		Log.d(APP_TAG, "Notification service called: " + message);
+		return START_STICKY;
 	}
 
 	@Override

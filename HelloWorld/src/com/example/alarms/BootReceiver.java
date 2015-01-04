@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.util.Log;
 
 import com.example.HappiestConstants;
 
@@ -23,9 +22,6 @@ public class BootReceiver extends BroadcastReceiver implements
 			ComplimentService.initialize(context);
 		}
 	}
-
-	// TODO make a preference state change listener to enable/disable this when
-	// the notifications are turned on and off in the preferences menu
 
 	/**
 	 * Programmatically enable the BootReciever so it can run on bootup of the
@@ -60,8 +56,6 @@ public class BootReceiver extends BroadcastReceiver implements
 	private static void setBootReceiverState(Context c, int state) {
 		ComponentName receiver = new ComponentName(c,
 				BootReceiver.class.getName());
-		Log.i(APP_TAG,
-				receiver.getPackageName() + "  " + receiver.getClassName());
 		PackageManager pm = c.getPackageManager();
 		pm.setComponentEnabledSetting(receiver,
 				PackageManager.COMPONENT_ENABLED_STATE_DISABLED,

@@ -1,6 +1,7 @@
 package com.example.settings;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -26,22 +27,23 @@ public class SettingsActivity extends Activity implements
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences SP, String key) {
-
+		Context c = this.getBaseContext();
 		// Enable notifications if set to true, cancel otherwise
 		if (key.equals("Notifications")) {
-			if (SP.getBoolean("Notifications", false)) {
-				BootReceiver.enableBootReceiver(this);
-				ComplimentService.initialize(this);
+			if (SP.getBoolean("Notifications", true)) {
+				BootReceiver.enableBootReceiver(c);
+				ComplimentService.initialize(c);
 			} else {
-				BootReceiver.disableBootReceiver(this);
-				ComplimentService.cancelAlarms(this);
+				BootReceiver.disableBootReceiver(c);
+				ComplimentService.cancelAlarms(c);
 			}
 		}
 
 		// Update the alarms if the desired time changed and notifications are
 		// enabled
 		if (key.equals(time_pref_KEY) && SP.getBoolean("Notifications", false)) {
-			ComplimentService.initialize(this);
+			ComplimentService.initialize(c);
 		}
+
 	}
 }
