@@ -9,6 +9,7 @@ import com.example.helloworld.MainActivity;
 
 @SuppressLint("DefaultLocale")
 public class Counter extends CountDownTimer {
+	
 
 	public Counter(long millisInFuture, long countDownInterval) {
 		super(millisInFuture, countDownInterval);
@@ -18,7 +19,7 @@ public class Counter extends CountDownTimer {
 	@Override
 	public void onFinish() {
 		// TODO Auto-generated method stub
-		MainActivity.countDown.setText("DONE");
+		MainActivity.countDown.setText("ITS COMING");
 	}
 
 	@Override

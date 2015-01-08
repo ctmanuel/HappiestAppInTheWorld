@@ -13,6 +13,7 @@ import com.example.HappiestConstants;
 import com.example.R;
 import com.example.notifications.NotificationPusher;
 import com.example.settings.SettingsActivity;
+import com.example.settings.TimePreference;
 
 public class MainActivity extends Activity {
 	public static TextView countDown;
@@ -20,10 +21,11 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
 		setContentView(R.layout.activity_main);
 		countDown = (TextView) findViewById(R.id.textViewTime);
-		countDown.setText("00:00:00");
+		
+		TimePreference.setCounter();
 
 	}
 

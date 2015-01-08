@@ -102,14 +102,7 @@ public class TimePreference extends DialogPreference {
 			if (callChangeListener(time)) {
 				persistString(time);
 			}
-			// calculate time to next alarm
-			int TotalTime = ((lastMinute * 60000) + (lastHour * 3600000))
-					- getCurrentTime();
-			if (TotalTime < 0)
-				TotalTime = 86400000 - Math.abs(TotalTime);
-
-			counter = new Counter(TotalTime, 1000);
-			counter.start();
+			setCounter();
 		}
 	}
 
@@ -158,5 +151,20 @@ public class TimePreference extends DialogPreference {
 																	// hr
 		return secondsToMilli + minutesToMilli + hoursToMilli; // total time in
 																// milliseconds
+	}
+	
+	public static void setCounter(){
+		// calculate time to next alarm
+		int TotalTime = ((lastMinute * 60000) + (lastHour * 3600000))
+				- getCurrentTime();
+		if (TotalTime < 0)
+			TotalTime = 86400000 - Math.abs(TotalTime);
+
+		if(counter!=null){
+			counter.cancel();
+		}
+		
+		counter = new Counter(TotalTime, 1000);
+		counter.start();
 	}
 }
