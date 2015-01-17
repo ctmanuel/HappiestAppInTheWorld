@@ -14,6 +14,7 @@ public interface HappiestConstants {
 	int alarmId = 346; // Arbitrary but unique ID
 	int mNotificationId = 001;
 	String last_day_key = "last_day_a_compliment_was_sent";
+	String compliments_used_key = "compliments_used";
 	String APP_TAG = "HappiestAppInTheWorld";
 
 	/**

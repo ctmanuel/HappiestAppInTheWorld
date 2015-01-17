@@ -25,7 +25,6 @@ import com.example.settings.TimePreference;
  * A background service to push notifications based on preference timers.
  */
 public class ComplimentService extends Service implements HappiestConstants {
-	private Set<Integer> numSet = new TreeSet<Integer>();
 	static Random rand = new Random();
 
 	/**
@@ -103,7 +102,6 @@ public class ComplimentService extends Service implements HappiestConstants {
 	@Override
 	public int onStartCommand(Intent i, int flags, int startId) {
 		Log.d(APP_TAG, "Compliment service started...");
-		Log.d(APP_TAG, "Num set size" + numSet.size());
 
 		// TODO a better Intent filter could probably be made...
 		if (i != null && i.getIntExtra("alarmId", alarmId - 1) == alarmId) {
@@ -142,15 +140,23 @@ public class ComplimentService extends Service implements HappiestConstants {
 			editor.putString(last_day_key, today);
 			editor.commit();
 
+			// Pick a random number for a compliment ID
 			int num_compliments = getResources().getStringArray(
 					R.array.compliments_arr).length - 1;
 			int rand = randInt(0, num_compliments);
-			// if its in the set, re-random until not.
-			while (numSet.contains(rand)) {
+			Set<String> compliments_used = SP.getStringSet(
+					compliments_used_key, new TreeSet<String>());
+
+			// Re-roll until a new compliment ID is chosen
+			while (compliments_used.contains(Integer.toString(rand))) {
 				rand = randInt(0, num_compliments);
 			}
-			numSet.add(rand);
+			compliments_used.add(Integer.toString(rand));
+			editor.putStringSet(compliments_used_key, compliments_used);
+			editor.commit();
+			Log.i(APP_TAG, "Compliments used: " + compliments_used.size());
 
+			// Get the compliment and send it
 			String msg = getResources().getStringArray(R.array.compliments_arr)[rand];
 			NotificationPusher.notify(getBaseContext(), msg);
 		} else {
