@@ -43,8 +43,18 @@ public class TimePreference extends DialogPreference {
 	 */
 	public static int getMinute(String time) {
 		String[] pieces = time.split(":");
-
 		return (Integer.parseInt(pieces[1]));
+	}
+
+	/**
+	 * Returns the time of day in minutes
+	 * 
+	 * @param time
+	 *            The current time
+	 * @return time of day in minutes
+	 */
+	public static int getMinutesInDay(String time) {
+		return getHour(time) * 60 + getMinute(time);
 	}
 
 	/**
@@ -152,18 +162,18 @@ public class TimePreference extends DialogPreference {
 		return secondsToMilli + minutesToMilli + hoursToMilli; // total time in
 																// milliseconds
 	}
-	
-	public static void setCounter(){
+
+	public static void setCounter() {
 		// calculate time to next alarm
 		int TotalTime = ((lastMinute * 60000) + (lastHour * 3600000))
 				- getCurrentTime();
 		if (TotalTime < 0)
 			TotalTime = 86400000 - Math.abs(TotalTime);
 
-		if(counter!=null){
+		if (counter != null) {
 			counter.cancel();
 		}
-		
+
 		counter = new Counter(TotalTime, 1000);
 		counter.start();
 	}

@@ -1,8 +1,6 @@
 package com.example.alarms;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
 import java.util.TimeZone;
@@ -28,6 +26,7 @@ import com.example.settings.TimePreference;
  */
 public class ComplimentService extends Service implements HappiestConstants {
 	private Set<Integer> numSet = new TreeSet<Integer>();
+	static Random rand = new Random();
 
 	/**
 	 * Initializes the compliment service using the times specified in the
@@ -52,25 +51,18 @@ public class ComplimentService extends Service implements HappiestConstants {
 
 		SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(c);
 		if (SP.getBoolean("Notifications", false)) {
-			Calendar calendar = Calendar.getInstance();
+			Calendar cal = Calendar.getInstance();
 
 			// Sending today's first notification
-			calendar.setTimeInMillis(System.currentTimeMillis());
-			calendar.setTimeZone(TimeZone.getDefault());
-			try { // TODO: Enforce a valid input for notification_hr preference.
-					// The user can set the preference to blank. Handled with a
-					// hack to catch the exception....
-				String time = SP.getString(time_pref_KEY, "12:00");
-				calendar.set(Calendar.HOUR_OF_DAY, TimePreference.getHour(time));
-				calendar.set(Calendar.MINUTE, TimePreference.getMinute(time));
-				Log.i(APP_TAG, "Time of next alarm: " + time);
-			} catch (NumberFormatException nfe) {
-				calendar.set(Calendar.HOUR_OF_DAY, 12);
-				calendar.set(Calendar.MINUTE, 12);
-				Log.w(APP_TAG,
-						"Invalid preference values for notification hour or minutes.");
-			}
-			alarm.setRepeating(AlarmManager.RTC, calendar.getTimeInMillis(),
+			cal.setTimeInMillis(System.currentTimeMillis());
+			cal.setTimeZone(TimeZone.getDefault());
+
+			String time = SP.getString(time_pref_KEY, "12:00");
+			cal.set(Calendar.HOUR_OF_DAY, TimePreference.getHour(time));
+			cal.set(Calendar.MINUTE, TimePreference.getMinute(time));
+			Log.i(APP_TAG, "Time of next alarm: " + time);
+
+			alarm.setRepeating(AlarmManager.RTC, cal.getTimeInMillis(),
 					AlarmManager.INTERVAL_DAY, pending);
 			Log.i(APP_TAG, "Started the timed Notifications service.");
 
@@ -110,20 +102,36 @@ public class ComplimentService extends Service implements HappiestConstants {
 
 	@Override
 	public int onStartCommand(Intent i, int flags, int startId) {
+		Log.d(APP_TAG, "Compliment service started...");
+		Log.d(APP_TAG, "Num set size" + numSet.size());
+
 		// TODO a better Intent filter could probably be made...
 		if (i != null && i.getIntExtra("alarmId", alarmId - 1) == alarmId) {
-
-			// Check to make sure we haven't sent a notification today
-			Calendar calendar = Calendar.getInstance();
+			Calendar cal = Calendar.getInstance();
 			SharedPreferences SP = PreferenceManager
 					.getDefaultSharedPreferences(this);
-			String today = new SimpleDateFormat("dd", Locale.US)
-					.format(calendar.getTime());
-			Log.i(APP_TAG, "Today's date: " + today);
+
+			// Check to make sure the alarm is going off on time
+			String time = hr_24_fmt.format(cal.getTime());
+			String desired = SP.getString(time_pref_KEY, "12:00");
+			int time_minutes = TimePreference.getMinutesInDay(time);
+			int desired_minutes = TimePreference.getMinutesInDay(desired);
+
+			// If the time of day in minutes is within 8 minutes, let the alarm
+			// activate.
+			// TODO Find a fix for the bug around midnight...
+			if (Math.abs(time_minutes - desired_minutes) > 8) {
+				Log.w(APP_TAG, "Wrong time for alarm!" + "\n    Desired: "
+						+ desired + "\n     Actual: " + time);
+				return START_STICKY;
+			}
+
+			// Check to make sure we haven't sent a notification today
+			String today = date_fmt.format(cal.getTime());
+			Log.d(APP_TAG, "Today's date: " + today);
 
 			// Return early if an alarm already went off today
-			if (today.equals(SP.getString(HappiestConstants.last_day,
-					"not set yet..."))
+			if (today.equals(SP.getString(last_day_key, "not set yet..."))
 					&& !SP.getBoolean("dev_override_daily", false)) {
 				Log.w(APP_TAG, "Already sent a compliment today...");
 				return START_STICKY;
@@ -131,39 +139,25 @@ public class ComplimentService extends Service implements HappiestConstants {
 
 			// Save today as the last day that a compliment was sent
 			SharedPreferences.Editor editor = SP.edit();
-			editor.putString(HappiestConstants.last_day, today);
+			editor.putString(last_day_key, today);
 			editor.commit();
 
-			int rand = randInt(
-					0,
-					getResources().getStringArray(R.array.compliments_arr).length - 1);
-
-			// if its in the set, re-random until not. else add to set
-			if (numSet.contains(rand)) {
-				while (numSet.contains(rand)) {
-					rand = randInt(
-							0,
-							getResources().getStringArray(
-									R.array.compliments_arr).length - 1);
-				}
+			int num_compliments = getResources().getStringArray(
+					R.array.compliments_arr).length - 1;
+			int rand = randInt(0, num_compliments);
+			// if its in the set, re-random until not.
+			while (numSet.contains(rand)) {
+				rand = randInt(0, num_compliments);
 			}
-
 			numSet.add(rand);
 
-			String message = getResources().getStringArray(
-					R.array.compliments_arr)[rand];
-			NotificationPusher.notify(getBaseContext(), message);
+			String msg = getResources().getStringArray(R.array.compliments_arr)[rand];
+			NotificationPusher.notify(getBaseContext(), msg);
 		} else {
 			Log.d(APP_TAG, "Not sure why this got called...");
 		}
 		return START_STICKY;
 
-	}
-
-	@Override
-	public IBinder onBind(Intent intent) {
-		// Currently has no binding functionality.
-		return null;
 	}
 
 	/**
@@ -179,16 +173,15 @@ public class ComplimentService extends Service implements HappiestConstants {
 	 * @see java.util.Random#nextInt(int)
 	 */
 	public static int randInt(int min, int max) {
-
-		// NOTE: Usually this should be a field rather than a method
-		// variable so that it is not re-seeded every call.
-		Random rand = new Random();
-
 		// nextInt is normally exclusive of the top value,
 		// so add 1 to make it inclusive
-		int randomNum = rand.nextInt((max - min) + 1) + min;
+		return rand.nextInt((max - min) + 1) + min;
+	}
 
-		return randomNum;
+	@Override
+	public IBinder onBind(Intent intent) {
+		// TODO Figure out what onBind is for?
+		return null;
 	}
 
 }

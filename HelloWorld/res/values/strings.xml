@@ -6,7 +6,7 @@
     <string name="hello_world">Hello world! Rob wuz hear!</string>
     <string name="happiest_app">This is the happiest app in the WORLD!!!</string>
     <string name="edit_message">Enter a message</string>
-    <string name="button_send">Send</string>
+    <string name="button_send">Send the developers a compliment!</string>
     <string name="title_activity_display_message">My Message</string>
     <string name="timePrefA_title">Use TimePicker</string>
     <string name="timer">00:00:00</string>
